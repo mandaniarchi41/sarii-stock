@@ -14,7 +14,7 @@ export const AlertProvider = ({ children }) => {
   const [alerts, setAlerts] = useState([]);
 
   const addAlert = (message, type = 'info') => {
-    const id = Date.now();
+    const id = Date.now() + Math.random();
     setAlerts(prev => [...prev, { id, message, type }]);
     
     // Auto remove alert after 5 seconds

@@ -15,6 +15,9 @@ const corsOptions = {
   credentials: true
 };
 
+app.use("/", (req, res) => {
+  res.status(200).json({message:"Welcome to sari stock api"});
+});
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' })); // Increase limit for JSON body
@@ -30,16 +33,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 const connection = mongoose.connection;
 connection.once('open', async () => {
   console.log('MongoDB database connection established successfully');
-  try {
-    await mongoose.connection.db.dropCollection('saris');
-    console.log('Collection "saris" dropped successfully. History cleared.');
-  } catch (error) {
-    if (error.code === 26) { // 26 means collection not found, which is fine on first run
-      console.log('Collection "saris" does not exist, no history to clear.');
-    } else {
-      console.error('Error dropping collection saris:', error);
-    }
-  }
 });
 
 connection.on('error', (err) => {
