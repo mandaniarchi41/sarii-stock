@@ -17,13 +17,17 @@ const Navbar = () => {
       const saris = await response.json();
       let count = 0;
 
-      saris.forEach(sari => {
-        sari.colors.forEach(color => {
-          if (color.minStock !== undefined && color.stock < color.minStock) {
-            count++;
-          }
+      if (Array.isArray(saris)) {
+        saris.forEach(sari => {
+          sari.colors.forEach(color => {
+            if (color.minStock !== undefined && color.stock < color.minStock) {
+              count++;
+            }
+          });
         });
-      });
+      } else {
+        console.warn('API returned non-array data for low stock count:', saris);
+      }
       setLowStockCount(count);
     } catch (error) {
       console.error('Error fetching low stock count:', error);

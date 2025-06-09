@@ -53,7 +53,13 @@ const SariManagement = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setSaris(data);
+        console.log('Fetched saris data:', typeof data, data);
+        if (Array.isArray(data)) {
+          setSaris(data);
+        } else {
+          console.warn('API returned non-array data for saris:', data);
+          setSaris([]);
+        }
       } catch (error) {
         console.error('Error fetching saris:', error);
         addAlert('Failed to fetch saris: ' + error.message, 'error');

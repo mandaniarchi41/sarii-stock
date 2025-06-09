@@ -15,12 +15,13 @@ const corsOptions = {
   credentials: true
 };
 
+// Middleware - apply CORS first
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' })); // Increase limit for JSON body
+
 app.use("/", (req, res) => {
   res.status(200).json({message:"Welcome to sari stock api"});
 });
-// Middleware
-app.use(cors(corsOptions));
-app.use(express.json({ limit: '10mb' })); // Increase limit for JSON body
 
 // MongoDB Connection URL from environment variables
 const uri = process.env.MONGODB_URI;
