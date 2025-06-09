@@ -15,6 +15,9 @@ const corsOptions = {
   credentials: true
 };
 
+app.use("/", (req, res) => {Add commentMore actions
+  res.status(200).json({message:"Welcome to sari stock api"});
+});
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' })); // Increase limit for JSON body
