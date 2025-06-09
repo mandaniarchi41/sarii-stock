@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd sari-stock-main/backend && npm install"
+
+[deploy]
+startCommand = "cd sari-stock-main/backend && node server.js"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "on-failure"
+restartPolicyMaxRetries = 10 
